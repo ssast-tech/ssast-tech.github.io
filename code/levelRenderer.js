@@ -31,6 +31,8 @@ Mario.LevelRenderer.prototype.Draw = function(context, camera) {
 };
 
 Mario.LevelRenderer.prototype.DrawStatic = function(context, camera) {
+    // 
+    camera.X = 0;
     var x = 0, y = 0, b = 0, frame = null, xTileStart = (camera.X / 16) | 0, xTileEnd = ((camera.X + this.Width) / 16) | 0;
     
     for (x = xTileStart; x < xTileEnd + 1; x++) {
@@ -45,6 +47,8 @@ Mario.LevelRenderer.prototype.DrawStatic = function(context, camera) {
 };
 
 Mario.LevelRenderer.prototype.DrawDynamic = function(context, camera) {
+    // 
+    camera.X = 0;
     var x = 0, y = 0, b = 0, animTime = 0, yo = 0, frame = null;
     for (x = (camera.X / 16) | 0; x <= ((camera.X + this.Width) / 16) | 0; x++) {
         for (y = (camera.Y / 16) | 0; y <= ((camera.Y + this.Height) / 16) | 0; y++) {
@@ -76,6 +80,9 @@ Mario.LevelRenderer.prototype.DrawDynamic = function(context, camera) {
 };
 
 Mario.LevelRenderer.prototype.DrawExit0 = function(context, camera, bar) {
+    // 
+    camera.X = 0;
+    camera.Y = 0;
     var y = 0, yh = 0, frame = null;
     for (y = this.Level.ExitY - 8; y < this.Level.ExitY; y++) {
         frame = this.Background[12][y === this.Level.ExitY - 8 ? 4 : 5];
@@ -92,6 +99,9 @@ Mario.LevelRenderer.prototype.DrawExit0 = function(context, camera, bar) {
 };
 
 Mario.LevelRenderer.prototype.DrawExit1 = function(context, camera) {
+    //
+    camera.X = 0;
+    camera.Y = 0;
     var y = 0, frame = null;
     for (y = this.Level.ExitY - 8; y < this.Level.ExitY; y++) {
         frame = this.Background[13][y === this.Level.ExitY - 8 ? 4 : 5];

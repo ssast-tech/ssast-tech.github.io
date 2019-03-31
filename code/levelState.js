@@ -122,6 +122,7 @@ Mario.LevelState.prototype.Update = function(delta) {
     if (this.Camera.X > this.Level.Width * 16 - 320) {
         this.Camera.X = this.Level.Width * 16 - 320;
     }
+    // this.Camera.X = 0;
 
     this.FireballsOnScreen = 0;
 
@@ -464,7 +465,8 @@ Mario.LevelState.prototype.CheckForChange = function(context) {
 	}
 	else {
 		if (this.GotoMapState) {
-			context.ChangeState(Mario.GlobalMapState);
+            // context.ChangeState(Mario.GlobalMapState);
+            context.ChangeState(new Mario.LevelState(1, Mario.LevelType.Castle))
 		}
 	}
 };

@@ -15,7 +15,8 @@ Mario.BackgroundRenderer = function(level, width, height, distance) {
 Mario.BackgroundRenderer.prototype = new Enjine.Drawable();
 
 Mario.BackgroundRenderer.prototype.Draw = function(context, camera) {
-    var xCam = camera.X / this.Distance;
+    // var xCam = camera.X / this.Distance;
+    var xCam = 0;
     var x = 0, y = 0, b = null, frame = null;
     
     //the OR truncates the decimal, quicker than Math.floor
