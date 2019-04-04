@@ -16,6 +16,7 @@ Mario.LevelGenerator.prototype = {
     CreateLevel: function(type, difficulty) {
         var i = 0, length = 0, floor = 0, x = 0, y = 0, ceiling = 0, run = 0, level = null;
         
+        
         this.Type = type;
         this.Difficulty = difficulty;
         this.Odds[Mario.Odds.Straight] = 20;
@@ -23,6 +24,7 @@ Mario.LevelGenerator.prototype = {
         this.Odds[Mario.Odds.Tubes] = 2 + difficulty;
         this.Odds[Mario.Odds.Jump] = 2 * difficulty;
         this.Odds[Mario.Odds.Cannon] = -10 + 5 * difficulty;
+        
         
         if (this.Type !== Mario.LevelType.Overground) {
             this.Odds[Mario.Odds.HillStraight] = 0;
@@ -41,33 +43,68 @@ Mario.LevelGenerator.prototype = {
         while (length < level.Width - 64) {
             length += this.BuildZone(level, length, level.Width - length);
         }
-        
-        floor = this.Height - 1 - (Math.random() * 4) | 0;
+
+        floor = this.Height - 3;
         level.ExitX = length + 8;
         level.ExitY = floor;
         
-        for (x = length; x < level.Width; x++) {
-            for (y = 0; y < this.Height; y++) {
-                if (y >= floor) {
-                    level.SetBlock(x, y, 1 + 9 * 16);
-                }
-            }
+        //x 0 ~ 19
+        //y 0 ~ 14
+        for (y = -10; y < level.Height; y++) {
+            level.SetBlock(20,y,8+8*16);
+        }
+
+        y=14
+        for (x = 0; x < level.Width; x ++) {
+            level.SetBlock(x,y, 9+8*16);
         }
         
-        if (type === Mario.LevelType.Castle || type === Mario.LevelType.Underground) {
-            for (x = 0; x < level.Width; x++) {
-                if (run-- <= 0 && x > 4) {
-                    ceiling = (Math.random() * 4) | 0;
-                    run = ((Math.random() * 4) | 0) + 4;
-                }
-                for (y = 0; y < level.Height; y++) {
-                    if ((x > 4 && y <= ceiling) || x < 1) {
-                        level.SetBlock(x, y, 1 + 9 * 16);
-                    }
-                }
-            }
+        y=10
+        for (x = 0; x < level.Width; x++) {
+            if(x < 7 || x > 12)
+                level.SetBlock(x,y, 9+8*16);
+        }
+        level.SetBlock(9,10, 6 + 16);
+        level.SetBlock(10,10, 7 + 16);
+
+        y=7
+        for (x = 0; x < level.Width; x++) {
+            if(x < 4 || x > 15)
+            level.SetBlock(x,y, 9+8*16);
+        }
+
+        y=6
+        for (x = 0; x < level.Width; x++) {
+            if(x > 6 && x < 13)
+            level.SetBlock(x,y, 9+8*16);
         }
         
+        y=2
+        for (x = 0; x < level.Width; x++) {
+            if(x < 8 || x > 11)
+            level.SetBlock(x,y, 9+8*16);
+        }
+
+        level.SetBlock(0,12,10);
+        level.SetBlock(1,12,11);
+        level.SetBlock(0,13,16 + 10);
+        level.SetBlock(1,13,16 + 11);
+        
+        level.SetBlock(0,0,10);
+        level.SetBlock(1,0,11);
+        level.SetBlock(0,1,16 + 10);
+        level.SetBlock(1,1,16 + 11);
+        
+        level.SetBlock(19,0,2 * 16 + 11);
+        level.SetBlock(19,1,3 * 16 + 11);
+        level.SetBlock(18,0,2 * 16 + 10);
+        level.SetBlock(18,1,3 * 16 + 10);
+
+        level.SetBlock(19,12,2 * 16 + 11);
+        level.SetBlock(19,13,3 * 16 + 11);
+        level.SetBlock(18,12,2 * 16 + 10);
+        level.SetBlock(18,13,3 * 16 + 10);
+
         this.FixWalls(level);
         
         return level;
@@ -104,15 +141,15 @@ Mario.LevelGenerator.prototype = {
             if (x < xo + js || x > xo + length - js - 1) {
                 for (y = 0; y < this.Height; y++) {
                     if (y >= floor) {
-                        level.SetBlock(x, y, 1 + 9 * 16);
+                        //level.SetBlock(x, y, 1 + 9 * 16);
                     } else if (hasStairs) {
                         if (x < xo + js) {
                             if (y >= floor - (x - xo) + 1) {
-                                level.SetBlock(x, y, 9);
+                                //level.SetBlock(x, y, 9);
                             }
                         } else {
                             if (y >= floor - ((xo + length) - x) + 2) {
-                                level.SetBlock(x, y, 9);
+                                //level.SetBlock(x, y, 9);
                             }
                         }
                     }
@@ -143,15 +180,15 @@ Mario.LevelGenerator.prototype = {
             
             for (y = 0; y < this.Height; y++) {
                 if (y >= floor) {
-                    level.SetBlock(x, y, 1 + 9 * 16);
+                    //level.SetBlock(x, y, 1 + 9 * 16);
                 } else {
                     if (x === xCannon && y >= cannonHeight) {
                         if (y === cannonHeight) {
-                            level.SetBlock(x, y, 14);
+                            //level.SetBlock(x, y, 14);
                         } else if (y === cannonHeight + 1) {
-                            level.SetBlock(x, y, 14 + 16);
+                            //level.SetBlock(x, y, 14 + 16);
                         } else {
-                            level.SetBlock(x, y, 14 + 2 * 16);
+                            //level.SetBlock(x, y, 14 + 2 * 16);
                         }
                     }
                 }
@@ -172,7 +209,7 @@ Mario.LevelGenerator.prototype = {
         for (x = xo; x < xo + length; x++) {
             for (y = 0; y < this.Height; y++) {
                 if (y >= floor) {
-                    level.SetBlock(x, y, 1 + 9 * 16);
+                    //level.SetBlock(x, y, 1 + 9 * 16);
                 }
             }
         }
@@ -270,14 +307,14 @@ Mario.LevelGenerator.prototype = {
             
             for (y = 0; y < this.Height; y++) {
                 if (y >= floor) {
-                    level.SetBlock(x, y, 1 + 9 * 16);
+                    //level.SetBlock(x, y, 1 + 9 * 16);
                 } else {
                     if ((x === xTube || x === xTube + 1) && y >= tubeHeight) {
                         xPic = 10 + x - xTube;
                         if (y === tubeHeight) {
-                            level.SetBlock(x, y, xPic);
+                            //level.SetBlock(x, y, xPic);
                         } else {
-                            level.SetBlock(x, y, xPic + 16);
+                            //level.SetBlock(x, y, xPic + 16);
                         }
                     }
                 }
@@ -288,8 +325,8 @@ Mario.LevelGenerator.prototype = {
     },
     
     BuildStraight: function(level, xo, maxLength, safe) {
-        var length = ((Math.random() * 10) | 0) + 2, floor = this.Height - 1 - ((Math.random() * 4) | 0), x = 0, y = 0;
-        
+       var length = ((Math.random() * 10) | 0) + 2, floor = this.Height - 1 - ((Math.random() * 4) | 0), x = 0, y = 0;
+
         if (safe) {
             length = 10 + ((Math.random() * 5) | 0);
         }
@@ -300,7 +337,7 @@ Mario.LevelGenerator.prototype = {
         for (x = xo; x < xo + length; x++) {
             for (y = 0; y < this.Height; y++) {
                 if (y >= floor) {
-                    level.SetBlock(x, y, 1 + 9 * 16);
+                    //level.SetBlock(x, y, 1 + 9 * 16);
                 }
             }
         }
@@ -326,7 +363,7 @@ Mario.LevelGenerator.prototype = {
         if (floor - 2 > 0) {
             if ((x1 - 1 - e) - (x0 + 1 + s) > 1) {
                 for (x = x0 + 1 + s; x < x1 - 1 - e; x++) {
-                    level.SetBlock(x, floor - 2, 2 + 2 * 16);
+                    //level.SetBlock(x, floor - 2, 2 + 2 * 16);
                 }
             }
         }
@@ -340,18 +377,18 @@ Mario.LevelGenerator.prototype = {
                     if (rocks) {
                         if (x !== x0 + 1 && x !== x1 - 2 && ((Math.random() * 3) | 0) === 0) {
                             if (((Math.random() * 4) | 0) === 0) {
-                                level.SetBlock(x, floor - 4, 4 + 2 + 16);
+                                //level.SetBlock(x, floor - 4, 4 + 2 + 16);
                             } else {
-                                level.SetBlock(x, floor - 4, 4 + 1 + 16);
+                               // level.SetBlock(x, floor - 4, 4 + 1 + 16);
                             }
                         } else if (((Math.random() * 4) | 0) === 0) {
                             if (((Math.random() * 4) | 0) === 0) {
-                                level.SetBlock(x, floor - 4, 2 + 16);
+                                //level.SetBlock(x, floor - 4, 2 + 16);
                             } else {
-                                level.SetBlock(x, floor - 4, 1 + 16);
+                                //level.SetBlock(x, floor - 4, 1 + 16);
                             }
                         } else {
-                            level.SetBlock(x, floor - 4, 16);
+                            //level.SetBlock(x, floor - 4, 16);
                         }
                     }
                 }
