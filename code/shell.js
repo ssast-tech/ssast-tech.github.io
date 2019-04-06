@@ -69,10 +69,10 @@ Mario.Shell.prototype.CollideCheck = function() {
 	if (xMarioD > -16 && xMarioD < 16) {
         if (yMarioD > -this.Height && yMarioD < Mario.MarioCharacter.Height) {
 			if (Mario.MarioCharacter.Ya > 0 && yMarioD <= 0 && (!Mario.MarioCharacter.OnGround || !Mario.MarioCharacter.WasOnGround)) {
-				Mario.MarioCharacter.Stomp(this);
+                Mario.MarioCharacter.Stomp(this);
 				if (this.Facing !== 0) {
 					this.Xa = 0;
-					this.Facing = 0;
+                    this.Facing = 0;
 				} else {
 					this.Facing = Mario.MarioCharacter.Facing;
 				}
@@ -87,7 +87,7 @@ Mario.Shell.prototype.CollideCheck = function() {
 			}
 		}
         return true;
-	}
+    }
     return false;
 };
 
