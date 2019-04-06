@@ -13,11 +13,16 @@ Enjine.GameCanvas = function() {
 Enjine.GameCanvas.prototype = {
     Initialize: function(canvasId, resWidth, resHeight) {
 		this.Canvas = document.getElementById(canvasId);
+
+		this.Canvas.width = window.innerWidth - 5;
+		this.Canvas.height = window.innerHeight - 5 ;
+
 		this.Context2D = this.Canvas.getContext("2d");
 		this.BackBuffer = document.createElement("canvas");
 		this.BackBuffer.width = resWidth;
 		this.BackBuffer.height = resHeight;
 		this.BackBufferContext2D = this.BackBuffer.getContext("2d");
+
 	},
 	
     BeginDraw: function() {
@@ -27,5 +32,11 @@ Enjine.GameCanvas.prototype = {
     
     EndDraw: function() {
         this.Context2D.drawImage(this.BackBuffer, 0, 0, this.BackBuffer.width, this.BackBuffer.height, 0, 0, this.Canvas.width, this.Canvas.height);
+
+		/*
+		this.Context2D.beginPath();
+		this.Context2D.arc(this.Canvas.width , this.Canvas.height - 100, 50, 0, 2 * Math.PI);
+		this.Context2D.fill();
+		*/
     }
 };
