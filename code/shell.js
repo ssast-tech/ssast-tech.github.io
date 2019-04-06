@@ -62,30 +62,34 @@ Mario.Shell.prototype.FireballCollideCheck = function(fireball) {
 
 Mario.Shell.prototype.CollideCheck = function() {
 	if (this.Carried || this.Dead || this.DeadTime > 0) {
-		return;
+		return false;
 	}
 	
 	var xMarioD = Mario.MarioCharacter.X - this.X, yMarioD = Mario.MarioCharacter.Y - this.Y;
 	if (xMarioD > -16 && xMarioD < 16) {
         if (yMarioD > -this.Height && yMarioD < Mario.MarioCharacter.Height) {
 			if (Mario.MarioCharacter.Ya > 0 && yMarioD <= 0 && (!Mario.MarioCharacter.OnGround || !Mario.MarioCharacter.WasOnGround)) {
-				Mario.MarioCharacter.Stomp(this);
+                Mario.MarioCharacter.Stomp(this);
 				if (this.Facing !== 0) {
 					this.Xa = 0;
-					this.Facing = 0;
+                    this.Facing = 0;
 				} else {
 					this.Facing = Mario.MarioCharacter.Facing;
 				}
 			} else {
 				if (this.Facing !== 0) {
-					Mario.MarioCharacter.GetHurt();
+                    Mario.MarioCharacter.GetHurt();
+                    return false;
 				} else {
 					Mario.MarioCharacter.Kick(this);
 					this.Facing = Mario.MarioCharacter.Facing;
 				}
-			}
-		}
-	}
+            }
+            return true;
+        }
+        
+    }
+    return false;
 };
 
 Mario.Shell.prototype.Move = function() {
