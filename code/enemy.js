@@ -30,7 +30,7 @@ Mario.Enemy = function(world, x, y, dir, type, winged) {
     
     this.XPicO = 8;
     this.YPicO = 31;
-    this.AvoidCliffs = this.Type === Mario.Enemy.RedKoopa;
+    this.AvoidCliffs = false;
     this.NoFireballDeath = this.Type === Mario.Enemy.Spiky;
     
     this.YPic = this.Type;
