@@ -76,7 +76,8 @@ Mario.LevelState.prototype.Enter = function () {
 
     this.Sprites.Add(Mario.MarioCharacter);
     this.StartTime = 1;
-    this.TimeLeft = 200;
+    //this.TimeLeft = 200;
+    this.TimeLeft = 0;
 
     this.GotoMapState = false;
     this.GotoLoseState = false;
@@ -109,9 +110,9 @@ Mario.LevelState.prototype.Update = function (delta) {
 
     this.Delta = delta;
 
-    this.TimeLeft -= delta;
+    this.TimeLeft += delta;
     if ((this.TimeLeft | 0) === 0) {
-        Mario.MarioCharacter.Die();
+       // Mario.MarioCharacter.Die();
     }
 
     if (this.StartTime > 0) {
@@ -312,16 +313,18 @@ Mario.LevelState.prototype.Draw = function (context) {
 
     this.DrawStringShadow(context, "MARIO " + Mario.MarioCharacter.Lives, 0, 0);
     this.DrawStringShadow(context, "00000000", 0, 1);
-    this.DrawStringShadow(context, "COIN", 14, 0);
-    this.DrawStringShadow(context, " " + Mario.MarioCharacter.Coins, 14, 1);
-    this.DrawStringShadow(context, "WORLD", 24, 0);
-    this.DrawStringShadow(context, " " + Mario.MarioCharacter.LevelString, 24, 1);
+    this.DrawStringShadow(context, "Coins", 24, 0);
+    this.DrawStringShadow(context, " " + Mario.MarioCharacter.Coins, 24, 1);
     this.DrawStringShadow(context, "TIME", 34, 0);
     time = this.TimeLeft | 0;
     if (time < 0) {
         time = 0;
     }
     this.DrawStringShadow(context, " " + time, 34, 1);
+
+    this.DrawStringShadow(context, "SCORE", 14, 0);
+    score = Mario.MarioCharacter.Coins * 5 + time;
+    this.DrawStringShadow(context, " " + score , 14, 1);
 
     if (this.StartTime > 0) {
         t = this.StartTime + this.Delta - 2;
