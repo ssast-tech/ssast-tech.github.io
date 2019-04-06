@@ -452,6 +452,7 @@ Mario.LevelState.prototype.Bump = function (x, y, canBreakBricks) {
                 this.AddSprite(new Mario.FireFlower(this, x * 16 + 8, y * 16 + 8));
                 this.Level.SetBlock(x, y, 17);
                 this.Level.SetBlockData(x, y, 17);
+                Mario.Tile.Behaviors[block&0xff]-=Mario.Tile.Already_generated_once;
             }
         } else {
             Mario.MarioCharacter.GetCoin();
