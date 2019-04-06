@@ -47,15 +47,28 @@ Enjine.GameCanvas.prototype = {
 
 		this.Context2D.beginPath();
 		this.Context2D.drawImage(leftImage, this.Canvas.width / 15 - radius, this.Canvas.height / 2 - 2.3 * radius, radius * 2, radius * 2)
-		this.Context2D.arc(this.Canvas.width / 15, this.Canvas.height / 2 - 1.3 * radius, radius, 0, 2 * Math.PI);
+		var leftX = this.Canvas.width / 15;
+		var leftY = this.Canvas.height / 2 - 1.3 * radius;
+		this.Context2D.arc(leftX, leftY, radius, 0, 2 * Math.PI);
 		this.Context2D.fill();
 
 		this.Context2D.beginPath();
 		this.Context2D.drawImage(rightImage, this.Canvas.width / 15 * 2 - radius, this.Canvas.height / 2 + 0.3 * radius, radius * 2, radius * 2)
-		this.Context2D.arc(this.Canvas.width / 15 * 2, this.Canvas.height / 2 + 1.3 * radius, radius, 0, 2 * Math.PI);
+		var rightX = this.Canvas.width / 15 * 2;
+		var rightY = this.Canvas.height / 2 + 1.3 * radius;
+		this.Context2D.arc(rightX, rightY, radius, 0, 2 * Math.PI);
 		this.Context2D.fill();
 
 		this.Context2D.restore();
 
-    }
+		this.Canvas.addEventListener('mousedown', function(event) {
+			console.log(event.pageX, event.pageY);
+			var x = event.pageX,
+				y = event.pageY;
+
+			// Collision detection between clicked offset and element.
+
+			// TODO: Keypress event
+		});
+	}
 };
