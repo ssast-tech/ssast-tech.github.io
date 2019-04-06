@@ -438,8 +438,6 @@ Mario.LevelState.prototype.Bump = function (x, y, canBreakBricks) {
 
     if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Bumpable) > 0) {
         this.BumpInto(x, y - 1);
-        this.Level.SetBlock(x, y, 4);
-        this.Level.SetBlockData(x, y, 4);
 
         if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Special) > 0) {
             Enjine.Resources.PlaySound("sprout");
@@ -447,6 +445,8 @@ Mario.LevelState.prototype.Bump = function (x, y, canBreakBricks) {
                 this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8));
             } else {
                 this.AddSprite(new Mario.FireFlower(this, x * 16 + 8, y * 16 + 8));
+                this.Level.SetBlock(x, y, 17);
+                this.Level.SetBlockData(x, y, 17);
             }
         } else {
             Mario.MarioCharacter.GetCoin();

@@ -62,7 +62,7 @@ Mario.Shell.prototype.FireballCollideCheck = function(fireball) {
 
 Mario.Shell.prototype.CollideCheck = function() {
 	if (this.Carried || this.Dead || this.DeadTime > 0) {
-		return;
+		return false;
 	}
 	
 	var xMarioD = Mario.MarioCharacter.X - this.X, yMarioD = Mario.MarioCharacter.Y - this.Y;
@@ -79,13 +79,16 @@ Mario.Shell.prototype.CollideCheck = function() {
 			} else {
 				if (this.Facing !== 0) {
 					Mario.MarioCharacter.GetHurt();
+                    return false;
 				} else {
 					Mario.MarioCharacter.Kick(this);
 					this.Facing = Mario.MarioCharacter.Facing;
 				}
 			}
 		}
+        return true;
 	}
+    return false;
 };
 
 Mario.Shell.prototype.Move = function() {
