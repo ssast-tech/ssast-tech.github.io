@@ -12,6 +12,7 @@ Mario.Tile = {
     Breakable: 1 << 5,
     PickUpable: 1 << 6,
     Animated: 1 << 7,
+    Already_generated_once: 1 << 8,
     Behaviors: [],
     
     //

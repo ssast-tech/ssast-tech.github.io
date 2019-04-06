@@ -435,23 +435,24 @@ Mario.LevelState.prototype.RemoveSprite = function (sprite) {
 
 Mario.LevelState.prototype.Bump = function (x, y, canBreakBricks) {
     var block = this.Level.GetBlock(x, y), xx = 0, yy = 0;
-
+    console.log(block);
     if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Bumpable) > 0) {
         this.BumpInto(x, y - 1);
 
         if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Special) > 0) {
             Enjine.Resources.PlaySound("sprout");
-            if (!Mario.MarioCharacter.Large) {
+            if (!(Mario.Tile.Behaviors[block&0xff]&Mario.Tile.Already_generated_once)) {
                 this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8));
+                Mario.Tile.Behaviors[block&0xff]+=Mario.Tile.Already_generated_once;
             } else {
                 this.AddSprite(new Mario.FireFlower(this, x * 16 + 8, y * 16 + 8));
+                this.Level.SetBlock(x, y, 17);
+                this.Level.SetBlockData(x, y, 17);
             }
         } else {
             Mario.MarioCharacter.GetCoin();
             Enjine.Resources.PlaySound("coin");
             this.AddSprite(new Mario.CoinAnim(this, x, y));
-            this.Level.SetBlock(x, y, 17);
-            this.Level.SetBlockData(x, y, 17);
         }
     }
 
