@@ -9,7 +9,7 @@ Mario.FireFlower = function(world, x, y) {
 	
 	this.World = world;
 	this.X = x;
-	this.Y = y;
+	this.Y = y-7;
 	this.Image = Enjine.Resources.Images["items"];
 	
 	this.XPicO = 8;
@@ -32,14 +32,5 @@ Mario.FireFlower.prototype.CollideCheck = function() {
 			Mario.MarioCharacter.GetFlower();
 			this.World.RemoveSprite(this);
 		}
-	}
-};
-
-Mario.FireFlower.prototype.Move = function() {
-	if (this.Life < 9) {
-		this.Layer = 0;
-		this.Y--;
-		this.Life++;
-		return;
 	}
 };

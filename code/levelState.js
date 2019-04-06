@@ -1,6 +1,6 @@
 /**
-	State for actually playing a randomly generated level.
-	Code by Rob Kleffner, 2011
+    State for actually playing a randomly generated level.
+    Code by Rob Kleffner, 2011
 */
 
 Mario.LevelState = function (difficulty, type) {
@@ -112,7 +112,7 @@ Mario.LevelState.prototype.Update = function (delta) {
 
     this.TimeLeft += delta;
     if ((this.TimeLeft | 0) === 0) {
-       // Mario.MarioCharacter.Die();
+        // Mario.MarioCharacter.Die();
     }
 
     if (this.StartTime > 0) {
@@ -247,14 +247,18 @@ Mario.LevelState.prototype.Update = function (delta) {
             this.updateEnermyInterval--;
         }
         let pos = Math.random() * 4 | 0;
+        let koopa = 0;
+        if (Math.random() * 10 > 5) {
+            koopa++;
+        }
         switch (pos) {
-            case 0: this.SpritesToAdd.push(new Mario.Enemy(this, 32, 32, 1, 0, false));
+            case 0: this.SpritesToAdd.push(new Mario.Enemy(this, 32, 32, 1, koopa, false));
                 break;
-            case 1: this.SpritesToAdd.push(new Mario.Enemy(this, 256, 32, 3, 0, false));
+            case 1: this.SpritesToAdd.push(new Mario.Enemy(this, 256, 32, -1, koopa, false));
                 break;
-            case 2: this.SpritesToAdd.push(new Mario.Enemy(this, 32, 224, 0, 0, false));
+            case 2: this.SpritesToAdd.push(new Mario.Enemy(this, 32, 224, 1, koopa, false));
                 break;
-            case 3: this.SpritesToAdd.push(new Mario.Enemy(this, 256, 224, 1, 0, false));
+            case 3: this.SpritesToAdd.push(new Mario.Enemy(this, 256, 224, -1, koopa, false));
                 break;
         }
     }
@@ -324,7 +328,7 @@ Mario.LevelState.prototype.Draw = function (context) {
 
     this.DrawStringShadow(context, "SCORE", 14, 0);
     score = Mario.MarioCharacter.Coins * 5 + time;
-    this.DrawStringShadow(context, " " + score , 14, 1);
+    this.DrawStringShadow(context, " " + score, 14, 1);
 
     if (this.StartTime > 0) {
         t = this.StartTime + this.Delta - 2;
@@ -438,8 +442,6 @@ Mario.LevelState.prototype.Bump = function (x, y, canBreakBricks) {
 
     if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Bumpable) > 0) {
         this.BumpInto(x, y - 1);
-        this.Level.SetBlock(x, y, 4);
-        this.Level.SetBlockData(x, y, 4);
 
         if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Special) > 0) {
             Enjine.Resources.PlaySound("sprout");
@@ -452,6 +454,8 @@ Mario.LevelState.prototype.Bump = function (x, y, canBreakBricks) {
             Mario.MarioCharacter.GetCoin();
             Enjine.Resources.PlaySound("coin");
             this.AddSprite(new Mario.CoinAnim(this, x, y));
+            this.Level.SetBlock(x, y, 17);
+            this.Level.SetBlockData(x, y, 17);
         }
     }
 
