@@ -96,8 +96,8 @@ Enjine.GameCanvas.prototype = {
 		
 
 		this.Canvas.addEventListener('mousedown', function(event) {
-			console.log(event.pageX, event.pageY);
 			event.preventDefault();
+
 			var x = event.pageX,
 				y = event.pageY;
 				if(x>=rightX-radius&&x<=rightX+radius&&y>=rightY-radius&&y<=rightY+radius)
@@ -124,12 +124,14 @@ Enjine.GameCanvas.prototype = {
 				{location.reload() ;
 				//home键
 				}
-				
-				
+		});
 
-			// Collision detection between clicked offset and element.
+		this.Canvas.addEventListener('mouseup', function(event) {
+			event.preventDefault();
+			var x = event.pageX,
+				y = event.pageY;
 
-			// TODO: Keypress event
+			// TODO
 		});
 	}
 };
