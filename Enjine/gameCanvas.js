@@ -97,6 +97,7 @@ Enjine.GameCanvas.prototype = {
 
 		this.Canvas.addEventListener('mousedown', function(event) {
 			console.log(event.pageX, event.pageY);
+			event.preventDefault();
 			var x = event.pageX,
 				y = event.pageY;
 				if(x>=rightX-radius&&x<=rightX+radius&&y>=rightY-radius&&y<=rightY+radius)
