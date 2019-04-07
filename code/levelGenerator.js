@@ -104,7 +104,25 @@ Mario.LevelGenerator.prototype = {
         level.SetBlock(19,13,3 * 16 + 11);
         level.SetBlock(18,12,2 * 16 + 10);
         level.SetBlock(18,13,3 * 16 + 10);
-        
+
+        level.SetBlock(0,8,11);
+        level.SetBlock(0,9,16+11);
+
+        level.SetBlock(19,8,10+16*2);
+        level.SetBlock(19,9,10+16*3);
+
+        level.SetBlock(0,5,11);
+        level.SetBlock(0,6,16+11);
+
+        level.SetBlock(19,5,10+16*2);
+        level.SetBlock(19,6,10+16*3);
+
+        level.SetBlock(0,3,11);
+        level.SetBlock(0,4,16+11);
+
+        level.SetBlock(19,3,10+16*2);
+        level.SetBlock(19,4,10+16*3);
+
         this.FixWalls(level);
         
         return level;
