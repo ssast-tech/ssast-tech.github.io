@@ -17,6 +17,13 @@ Enjine.GameCanvas.prototype = {
 		this.Canvas.width = window.innerWidth;
 		this.Canvas.height = window.innerHeight;
 
+		var that = this;
+
+		window.addEventListener('resize', function(e) {
+			that.Canvas.width = window.innerWidth;
+			that.Canvas.height = window.innerHeight;
+		});
+
 		this.Context2D = this.Canvas.getContext("2d");
 		this.BackBuffer = document.createElement("canvas");
 		this.BackBuffer.width = resWidth;
@@ -133,7 +140,7 @@ Enjine.GameCanvas.prototype = {
 		this.Canvas.addEventListener('touchend', function(event) {
 			event.preventDefault();
 
-			var newR = 2 * radius;
+			var newR = 4 * radius;
 
 			var e;
 			for(e of event.changedTouches)
