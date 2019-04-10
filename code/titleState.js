@@ -31,7 +31,7 @@ Mario.TitleState.prototype.Enter = function() {
     this.logo.X = 0, this.logo.Y = 0;
 
     this.font = Mario.SpriteCuts.CreateRedFont();
-    this.font.Strings[0] = { String: "Press S to Start", X: 96, Y: 120 };
+    //this.font.Strings[0] = { String: "Press S to Start", X: 96, Y: 120 };
 
     this.logoY = 20;
 
@@ -50,7 +50,7 @@ Mario.TitleState.prototype.Enter = function() {
 
 Mario.TitleState.prototype.Exit = function() {
     Mario.StopMusic();
-	
+
     this.drawManager.Clear();
     delete this.drawManager;
     delete this.camera;
@@ -70,7 +70,7 @@ Mario.TitleState.prototype.Draw = function(context) {
     this.drawManager.Draw(context, this.camera);
 
     context.drawImage(Enjine.Resources.Images["title"], 0, 120);
-    context.drawImage(Enjine.Resources.Images["logo"], 0, this.logoY);
+    context.drawImage(Enjine.Resources.Images["logo"], (320 - Enjine.Resources.Images["logo"].width) / 2, this.logoY);
 
     this.font.Draw(context, this.Camera);
 };
