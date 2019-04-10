@@ -10,6 +10,8 @@ Enjine.GameCanvas = function() {
 	this.BackBufferContext2D = null;
 };
 
+var start = false;
+
 Enjine.GameCanvas.prototype = {
     Initialize: function(canvasId, resWidth, resHeight) {
 		this.Canvas = document.getElementById(canvasId);
@@ -104,6 +106,12 @@ Enjine.GameCanvas.prototype = {
 
 		this.Canvas.addEventListener('touchstart', function(event) {
 			event.preventDefault();
+
+			if(!start)
+			{
+				start = true;
+				return;
+			}
 
 			var e;
 			for(e of event.touches)
