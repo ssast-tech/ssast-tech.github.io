@@ -451,7 +451,6 @@ Mario.LevelState.prototype.RemoveSprite = function (sprite) {
 
 Mario.LevelState.prototype.Bump = function (x, y, canBreakBricks) {
     var block = this.Level.GetBlock(x, y), xx = 0, yy = 0;
-    console.log(block);
     if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Bumpable) > 0) {
         this.BumpInto(x, y - 1);
 
