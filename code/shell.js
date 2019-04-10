@@ -92,7 +92,7 @@ Mario.Shell.prototype.CollideCheck = function() {
 };
 
 Mario.Shell.prototype.Move = function() {
-	var sideWaysSpeed = 11, i = 0;
+	var sideWaysSpeed = 5, i = 0;
 	if (this.Carried) {
 		this.World.CheckShellCollide(this);
 		return;
