@@ -98,60 +98,70 @@ Enjine.GameCanvas.prototype = {
 		this.Canvas.addEventListener('touchstart', function(event) {
 			event.preventDefault();
 
-			var x = event.touches[0].clientX,
-				y = event.touches[0].clientY;
+			var e;
+			for(e of event.touches)
+			{
+				var x = e.clientX,
+					y = e.clientY;
 				if(x>=rightX-radius&&x<=rightX+radius&&y>=rightY-radius&&y<=rightY+radius)
 				{Enjine.KeyboardInput.Pressed[39]=true;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[39]=false},200);
-				//右键
+					//右键
 				}
 				if(x>=leftX-radius&&x<=leftX+radius&&y>=leftY-radius&&y<=leftY+radius)
 				{Enjine.KeyboardInput.Pressed[37]=true;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[37]=false},200);
-				//左键
+					//左键
 				}
 				if(x>=upX-radius&&x<=upX+radius&&y>=upY-radius&&y<=upY+radius)
 				{Enjine.KeyboardInput.Pressed[83]=true;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[83]=false},200);
-				//跳越键
+					//跳越键
 				}
 				if(x>=attackX-radius&&x<=attackX+radius&&y>=attackY-radius&&y<=attackY+radius)
 				{Enjine.KeyboardInput.Pressed[65]=true;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[65]=false},200);
-				//攻击键
+					//攻击键
 				}
 				if(x>=backX-radius&&x<=backX+radius&&y>=backY-radius&&y<=backY+radius)
 				{location.reload() ;
-				//home键
+					//home键
 				}
+			}
 		});
 
 		this.Canvas.addEventListener('touchend', function(event) {
 			event.preventDefault();
-			var x = event.changedTouches[0].clientX,
-				y = event.changedTouches[0].clientY;
 
+			var newR = 2 * radius;
 
-				if(x>=rightX-radius&&x<=rightX+radius&&y>=rightY-radius&&y<=rightY+radius)
+			var e;
+			for(e of event.changedTouches)
+			{
+				var x = e.clientX,
+					y = e.clientY;
+
+				if(x>=rightX-newR&&x<=rightX+newR&&y>=rightY-newR&&y<=rightY+newR)
 				{Enjine.KeyboardInput.Pressed[39]=false;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[39]=false},200);
-				//右键
+					//右键
 				}
-				if(x>=leftX-radius&&x<=leftX+radius&&y>=leftY-radius&&y<=leftY+radius)
+				if(x>=leftX-newR&&x<=leftX+newR&&y>=leftY-newR&&y<=leftY+newR)
 				{Enjine.KeyboardInput.Pressed[37]=false;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[37]=false},200);
-				//左键
+					//左键
 				}
-				if(x>=upX-radius&&x<=upX+radius&&y>=upY-radius&&y<=upY+radius)
+				if(x>=upX-newR&&x<=upX+newR&&y>=upY-newR&&y<=upY+newR)
 				{Enjine.KeyboardInput.Pressed[83]=false;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[83]=false},200);
-				//跳越键
+					//跳越键
 				}
-				if(x>=attackX-radius&&x<=attackX+radius&&y>=attackY-radius&&y<=attackY+radius)
+				if(x>=attackX-newR&&x<=attackX+newR&&y>=attackY-newR&&y<=attackY+newR)
 				{Enjine.KeyboardInput.Pressed[65]=false;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[65]=false},200);
-				//攻击键
+					//攻击键
 				}
+			}
 		});
 	}
 };
