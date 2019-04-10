@@ -110,6 +110,7 @@ Enjine.GameCanvas.prototype = {
 			if(!start)
 			{
 				start = true;
+				Enjine.KeyboardInput.Pressed[83]=true;
 				return;
 			}
 
