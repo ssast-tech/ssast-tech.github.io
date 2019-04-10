@@ -95,11 +95,11 @@ Enjine.GameCanvas.prototype = {
 
 		
 
-		this.Canvas.addEventListener('mousedown', function(event) {
+		this.Canvas.addEventListener('touchstart', function(event) {
 			event.preventDefault();
 
-			var x = event.pageX,
-				y = event.pageY;
+			var x = event.touches[0].clientX,
+				y = event.touches[0].clientY;
 				if(x>=rightX-radius&&x<=rightX+radius&&y>=rightY-radius&&y<=rightY+radius)
 				{Enjine.KeyboardInput.Pressed[39]=true;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[39]=false},200);
@@ -126,10 +126,10 @@ Enjine.GameCanvas.prototype = {
 				}
 		});
 
-		this.Canvas.addEventListener('mouseup', function(event) {
+		this.Canvas.addEventListener('touchend', function(event) {
 			event.preventDefault();
-			var x = event.pageX,
-				y = event.pageY;
+			var x = event.touches[0].clientX,
+				y = event.touches[0].clientY;
 
 				if(x>=rightX-radius&&x<=rightX+radius&&y>=rightY-radius&&y<=rightY+radius)
 				{Enjine.KeyboardInput.Pressed[39]=false;
