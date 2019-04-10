@@ -128,8 +128,9 @@ Enjine.GameCanvas.prototype = {
 
 		this.Canvas.addEventListener('touchend', function(event) {
 			event.preventDefault();
-			var x = event.touches[0].clientX,
-				y = event.touches[0].clientY;
+			var x = event.changedTouches[0].clientX,
+				y = event.changedTouches[0].clientY;
+
 
 				if(x>=rightX-radius&&x<=rightX+radius&&y>=rightY-radius&&y<=rightY+radius)
 				{Enjine.KeyboardInput.Pressed[39]=false;
