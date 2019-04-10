@@ -32,7 +32,7 @@ Mario.LevelState = function (difficulty, type) {
     this.GotoLoseState = false;
 
     this.updateEnermy = 0;
-    this.updateEnermyInterval = 150;
+    this.updateEnermyInterval = 120;
 };
 
 Mario.LevelState.prototype = new Enjine.GameState();
@@ -244,11 +244,11 @@ Mario.LevelState.prototype.Update = function (delta) {
     this.updateEnermy++;
     if (this.updateEnermy % this.updateEnermyInterval == 0) {
         if (this.updateEnermyInterval > 20) {
-            this.updateEnermyInterval--;
+            this.updateEnermyInterval -= 2;
         }
         let pos = Math.random() * 8 | 0;
         let koopa = 0;
-        if (Math.random() * 10 > 5) {
+        if (Math.random() * 10 > 3) {
             koopa++;
         }
         let winged = false;
