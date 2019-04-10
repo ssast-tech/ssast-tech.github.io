@@ -102,22 +102,22 @@ Enjine.GameCanvas.prototype = {
 				y = event.pageY;
 				if(x>=rightX-radius&&x<=rightX+radius&&y>=rightY-radius&&y<=rightY+radius)
 				{Enjine.KeyboardInput.Pressed[39]=true;
-				setTimeout(function(){Enjine.KeyboardInput.Pressed[39]=false},200);
+					//setTimeout(function(){Enjine.KeyboardInput.Pressed[39]=false},200);
 				//右键
 				}
 				if(x>=leftX-radius&&x<=leftX+radius&&y>=leftY-radius&&y<=leftY+radius)
 				{Enjine.KeyboardInput.Pressed[37]=true;
-				setTimeout(function(){Enjine.KeyboardInput.Pressed[37]=false},200);
+					//setTimeout(function(){Enjine.KeyboardInput.Pressed[37]=false},200);
 				//左键
 				}
 				if(x>=upX-radius&&x<=upX+radius&&y>=upY-radius&&y<=upY+radius)
 				{Enjine.KeyboardInput.Pressed[83]=true;
-				setTimeout(function(){Enjine.KeyboardInput.Pressed[83]=false},200);
+					//setTimeout(function(){Enjine.KeyboardInput.Pressed[83]=false},200);
 				//跳越键
 				}
 				if(x>=attackX-radius&&x<=attackX+radius&&y>=attackY-radius&&y<=attackY+radius)
 				{Enjine.KeyboardInput.Pressed[65]=true;
-				setTimeout(function(){Enjine.KeyboardInput.Pressed[65]=false},200);
+					//setTimeout(function(){Enjine.KeyboardInput.Pressed[65]=false},200);
 				//攻击键
 				}
 				if(x>=backX-radius&&x<=backX+radius&&y>=backY-radius&&y<=backY+radius)
@@ -131,7 +131,26 @@ Enjine.GameCanvas.prototype = {
 			var x = event.pageX,
 				y = event.pageY;
 
-			// TODO
+				if(x>=rightX-radius&&x<=rightX+radius&&y>=rightY-radius&&y<=rightY+radius)
+				{Enjine.KeyboardInput.Pressed[39]=false;
+					//setTimeout(function(){Enjine.KeyboardInput.Pressed[39]=false},200);
+				//右键
+				}
+				if(x>=leftX-radius&&x<=leftX+radius&&y>=leftY-radius&&y<=leftY+radius)
+				{Enjine.KeyboardInput.Pressed[37]=false;
+					//setTimeout(function(){Enjine.KeyboardInput.Pressed[37]=false},200);
+				//左键
+				}
+				if(x>=upX-radius&&x<=upX+radius&&y>=upY-radius&&y<=upY+radius)
+				{Enjine.KeyboardInput.Pressed[83]=false;
+					//setTimeout(function(){Enjine.KeyboardInput.Pressed[83]=false},200);
+				//跳越键
+				}
+				if(x>=attackX-radius&&x<=attackX+radius&&y>=attackY-radius&&y<=attackY+radius)
+				{Enjine.KeyboardInput.Pressed[65]=false;
+					//setTimeout(function(){Enjine.KeyboardInput.Pressed[65]=false},200);
+				//攻击键
+				}
 		});
 	}
 };
