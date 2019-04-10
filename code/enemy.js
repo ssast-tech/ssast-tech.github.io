@@ -86,7 +86,7 @@ Mario.Enemy.prototype.CollideCheck = function() {
 };
 
 Mario.Enemy.prototype.Move = function() {
-    var i = 0, sideWaysSpeed = 1.75, runFrame = 0;
+    var i = 0, sideWaysSpeed = 1.5, runFrame = 0;
 
     this.WingTime++;
     if (this.DeadTime > 0) {
