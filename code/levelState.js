@@ -251,22 +251,26 @@ Mario.LevelState.prototype.Update = function (delta) {
         if (Math.random() * 10 > 5) {
             koopa++;
         }
+        let winged = false;
+        if (Math.random() * 10 > 8) {
+            winged = true;
+        }
         switch (pos) {
-            case 0: this.SpritesToAdd.push(new Mario.Enemy(this, 32, 32, 1, koopa, false));
+            case 0: this.SpritesToAdd.push(new Mario.Enemy(this, 32, 32, 1, koopa, winged));
                 break;
-            case 1: this.SpritesToAdd.push(new Mario.Enemy(this, 288, 32, -1, koopa, false));
+            case 1: this.SpritesToAdd.push(new Mario.Enemy(this, 288, 32, -1, koopa, winged));
                 break;
-            case 2: this.SpritesToAdd.push(new Mario.Enemy(this, 32, 224, 1, koopa, false));
+            case 2: this.SpritesToAdd.push(new Mario.Enemy(this, 32, 224, 1, koopa, winged));
                 break;
-            case 3: this.SpritesToAdd.push(new Mario.Enemy(this, 288, 224, -1, koopa, false));
+            case 3: this.SpritesToAdd.push(new Mario.Enemy(this, 288, 224, -1, koopa, winged));
                 break;
-            case 4: this.SpritesToAdd.push(new Mario.Enemy(this, 16, 112, 1, koopa, false));
+            case 4: this.SpritesToAdd.push(new Mario.Enemy(this, 16, 112, 1, koopa, winged));
                 break;
-            case 5: this.SpritesToAdd.push(new Mario.Enemy(this, 304, 112, -1, koopa, false));
+            case 5: this.SpritesToAdd.push(new Mario.Enemy(this, 304, 112, -1, koopa, winged));
                 break;
-            case 6: this.SpritesToAdd.push(new Mario.Enemy(this, 16, 160, 1, koopa, false));
+            case 6: this.SpritesToAdd.push(new Mario.Enemy(this, 16, 160, 1, koopa, winged));
                 break;
-            case 7: this.SpritesToAdd.push(new Mario.Enemy(this, 304, 160, -1, koopa, false));
+            case 7: this.SpritesToAdd.push(new Mario.Enemy(this, 304, 160, -1, koopa, winged));
                 break;
         }
     }

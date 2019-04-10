@@ -40,12 +40,13 @@ Mario.LevelGenerator.prototype = {
         
         level = new Mario.Level(this.Width, this.Height);
         length += this.BuildStraight(level, 0, level.Width, true);
+        /*
         while (length < level.Width - 64) {
-            length += this.BuildZone(level, length, level.Width - length);
+            // length += this.BuildZone(level, length, level.Width - length);
         }
-
+        */
         floor = this.Height - 3;
-        level.ExitX = length + 8;
+        level.ExitX = length + 80;
         level.ExitY = floor;
         
         //x 0 ~ 19
