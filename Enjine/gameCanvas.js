@@ -14,8 +14,8 @@ Enjine.GameCanvas.prototype = {
     Initialize: function(canvasId, resWidth, resHeight) {
 		this.Canvas = document.getElementById(canvasId);
 
-		this.Canvas.width = window.innerWidth - 5;
-		this.Canvas.height = window.innerHeight - 5;
+		this.Canvas.width = window.innerWidth;
+		this.Canvas.height = window.innerHeight;
 
 		this.Context2D = this.Canvas.getContext("2d");
 		this.BackBuffer = document.createElement("canvas");
@@ -24,12 +24,12 @@ Enjine.GameCanvas.prototype = {
 		this.BackBufferContext2D = this.BackBuffer.getContext("2d");
 
 	},
-	
+
     BeginDraw: function() {
         this.BackBufferContext2D.clearRect(0, 0, this.BackBuffer.width, this.BackBuffer.height);
         this.Context2D.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
     },
-    
+
     EndDraw: function() {
         this.Context2D.drawImage(this.BackBuffer, 0, 0, this.BackBuffer.width, this.BackBuffer.height, 0, 0, this.Canvas.width, this.Canvas.height);
 
@@ -89,11 +89,11 @@ Enjine.GameCanvas.prototype = {
 		this.Context2D.arc(attackX, attackY, radius, 0, 2 * Math.PI);
 		this.Context2D.fill();
 
-		
+
 
 		this.Context2D.restore();
 
-		
+
 
 		this.Canvas.addEventListener('touchstart', function(event) {
 			event.preventDefault();
