@@ -23,7 +23,7 @@ function resize(that)
 
 	if(iOS)
 	{
-		that.Canvas.width = window.innerWidth * 0.98;
+		that.Canvas.width = window.innerWidth;
 		that.Canvas.height = that.Canvas.width / 2;
 	}
 	else
@@ -164,7 +164,8 @@ Enjine.GameCanvas.prototype = {
 					//攻击键
 				}
 				if(x>=backX-radius&&x<=backX+radius&&y>=backY-radius&&y<=backY+radius)
-				{location.reload() ;
+				{
+					//location.reload() ;
 					//home键
 				}
 			}
