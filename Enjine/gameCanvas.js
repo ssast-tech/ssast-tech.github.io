@@ -19,6 +19,8 @@ Enjine.GameCanvas.prototype = {
 		this.Canvas.width = window.innerWidth;
 		this.Canvas.height = window.innerHeight;
 
+		alert(String(this.Canvas.width) + ' ' + String(this.Canvas.height));
+
 		if(this.Canvas.height > this.Canvas.width)
 			this.Canvas.height = this.Canvas.width;
 
