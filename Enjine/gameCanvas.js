@@ -12,19 +12,25 @@ Enjine.GameCanvas = function() {
 
 var start = false;
 
+
 function resize(that)
 {
 	/*
 	that.Canvas.width = screen.width;
 	that.Canvas.height = screen.height;
 	*/
-	/*
-	that.Canvas.width = window.innerWidth;
-	that.Canvas.height = window.innerHeight;
-	*/
+	var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-	that.Canvas.width = window.innerWidth;
-	that.Canvas.height = that.Canvas.width / 2;
+	if(iOS)
+	{
+		that.Canvas.width = window.innerWidth * 1.0;
+		that.Canvas.height = that.Canvas.width / 2;
+	}
+	else
+	{
+		that.Canvas.width = window.innerWidth;
+		that.Canvas.height = window.innerHeight;
+	}
 
 
 	//alert(String(that.Canvas.width) + ' ' + String(that.Canvas.height));
@@ -35,7 +41,7 @@ function resize(that)
 }
 
 Enjine.GameCanvas.prototype = {
-    Initialize: function(canvasId, resWidth, resHeight) {
+	Initialize: function(canvasId, resWidth, resHeight) {
 		this.Canvas = document.getElementById(canvasId);
 
 		var that = this;
@@ -58,13 +64,13 @@ Enjine.GameCanvas.prototype = {
 
 	},
 
-    BeginDraw: function() {
-        this.BackBufferContext2D.clearRect(0, 0, this.BackBuffer.width, this.BackBuffer.height);
-        this.Context2D.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
-    },
+	BeginDraw: function() {
+		this.BackBufferContext2D.clearRect(0, 0, this.BackBuffer.width, this.BackBuffer.height);
+		this.Context2D.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
+	},
 
-    EndDraw: function() {
-        this.Context2D.drawImage(this.BackBuffer, 0, 0, this.BackBuffer.width, this.BackBuffer.height, 0, 0, this.Canvas.width, this.Canvas.height);
+	EndDraw: function() {
+		this.Context2D.drawImage(this.BackBuffer, 0, 0, this.BackBuffer.width, this.BackBuffer.height, 0, 0, this.Canvas.width, this.Canvas.height);
 
 		var radius = this.Canvas.width / 16;
 
