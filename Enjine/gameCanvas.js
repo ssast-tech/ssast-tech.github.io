@@ -12,45 +12,31 @@ Enjine.GameCanvas = function() {
 
 var start = false;
 
+function resize(that)
+{
+	/*
+	that.Canvas.width = screen.width;
+	that.Canvas.height = screen.height;
+	*/
+	that.Canvas.width = window.innerWidth;
+	that.Canvas.height = window.innerHeight;
+
+	/*
+	if(that.Canvas.height > that.Canvas.width)
+		that.Canvas.height = that.Canvas.width;
+		*/
+}
+
 Enjine.GameCanvas.prototype = {
     Initialize: function(canvasId, resWidth, resHeight) {
 		this.Canvas = document.getElementById(canvasId);
 
-		this.Canvas.width = window.innerHeight;
-		this.Canvas.height = window.innerWidth;
-		/*
-		this.Canvas.width = screen.width;
-		this.Canvas.height = screen.height;
-		*/
-
-		alert(String(window.innerWidth) + ' ' + String(window.innerHeight));
-		alert(String(screen.width) + ' ' + String(screen.height));
-		alert(String(window.screen.width) + ' ' + String(window.screen.height));
-
-		/*
-		if(this.Canvas.height > this.Canvas.width)
-			this.Canvas.height = this.Canvas.width;
-			*/
-
 		var that = this;
 
-		$(window).resize(function(e) {
-			/*
-			that.Canvas.width = screen.width;
-			that.Canvas.height = screen.height;
-			*/
-			/*
-			that.Canvas.width = window.innerWidth;
-			that.Canvas.height = window.innerHeight;
-			*/
+		resize(that);
 
-			that.Canvas.width = window.innerHeight;
-			that.Canvas.height = window.innerWidth;
-
-			/*
-			if(that.Canvas.height > that.Canvas.width)
-				that.Canvas.height = that.Canvas.width;
-			*/
+		$(window).resize(function(){
+			resize(that);
 		});
 
 		this.Context2D = this.Canvas.getContext("2d");
