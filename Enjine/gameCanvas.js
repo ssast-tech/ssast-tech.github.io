@@ -23,7 +23,7 @@ function resize(that)
 
 	if(iOS)
 	{
-		that.Canvas.width = window.innerWidth * 0.99;
+		that.Canvas.width = window.innerWidth * 0.999;
 		that.Canvas.height = that.Canvas.width / 2;
 	}
 	else
