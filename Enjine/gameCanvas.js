@@ -21,7 +21,7 @@ function resize(that)
 	that.Canvas.width = window.innerWidth;
 	that.Canvas.height = window.innerHeight;
 
-	alert(String(that.Canvas.height) + ' ' + String(that.Canvas.height));
+	alert(String(that.Canvas.width) + ' ' + String(that.Canvas.height));
 	/*
 	if(that.Canvas.height > that.Canvas.width)
 		that.Canvas.height = that.Canvas.width;
