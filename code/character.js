@@ -51,7 +51,7 @@ Mario.Character.prototype = new Mario.NotchSprite(null);
 
 Mario.Character.prototype.Initialize = function(world) {
     this.World = world;
-    this.X = 32;
+    this.X = 160;
     this.Y = 0;
 	this.PowerUpTime = 0;
 
