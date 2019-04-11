@@ -24,7 +24,7 @@ Enjine.GameCanvas.prototype = {
 
 		var that = this;
 
-		window.addEventListener('resize', function(e) {
+		$(window).resize(function(e) {
 			that.Canvas.width = window.innerWidth;
 			that.Canvas.height = window.innerHeight;
 
