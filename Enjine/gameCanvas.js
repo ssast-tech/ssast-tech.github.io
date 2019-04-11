@@ -68,6 +68,8 @@ Enjine.GameCanvas.prototype = {
 	},
 
 	EndDraw: function() {
+		resize(this);
+
 		this.Context2D.drawImage(this.BackBuffer, 0, 0, this.BackBuffer.width, this.BackBuffer.height, 0, 0, this.Canvas.width, this.Canvas.height);
 
 		var radius = this.Canvas.width / 16;
