@@ -27,6 +27,9 @@ Enjine.GameCanvas.prototype = {
 		window.addEventListener('resize', function(e) {
 			that.Canvas.width = window.innerWidth;
 			that.Canvas.height = window.innerHeight;
+
+			if(that.Canvas.height > that.Canvas.width)
+				that.Canvas.height = that.Canvas.width;
 		});
 
 		this.Context2D = this.Canvas.getContext("2d");
