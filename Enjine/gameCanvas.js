@@ -21,6 +21,7 @@ function resize(that)
 	that.Canvas.width = window.innerWidth;
 	that.Canvas.height = window.innerHeight;
 
+	alert(that.Canvas.height);
 	/*
 	if(that.Canvas.height > that.Canvas.width)
 		that.Canvas.height = that.Canvas.width;
