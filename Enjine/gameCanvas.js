@@ -16,8 +16,8 @@ Enjine.GameCanvas.prototype = {
     Initialize: function(canvasId, resWidth, resHeight) {
 		this.Canvas = document.getElementById(canvasId);
 
-		this.Canvas.width = window.innerWidth;
-		this.Canvas.height = window.innerHeight;
+		this.Canvas.width = window.innerHeight;
+		this.Canvas.height = window.innerWidth;
 		/*
 		this.Canvas.width = screen.width;
 		this.Canvas.height = screen.height;
@@ -33,7 +33,6 @@ Enjine.GameCanvas.prototype = {
 		var that = this;
 
 		$(window).resize(function(e) {
-
 			/*
 			that.Canvas.width = screen.width;
 			that.Canvas.height = screen.height;
