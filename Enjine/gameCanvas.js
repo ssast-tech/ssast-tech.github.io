@@ -36,7 +36,7 @@ Enjine.GameCanvas.prototype = {
 
 		resize(that);
 
-		window.addEventListener('resize', (function(){
+		window.addEventListener('resize', function(){
 			resize(that);
 		});
 
