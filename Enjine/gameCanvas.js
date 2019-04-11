@@ -34,10 +34,8 @@ function resize(that)
 
 
 	//alert(String(that.Canvas.width) + ' ' + String(that.Canvas.height));
-	/*
 	if(that.Canvas.height > that.Canvas.width)
 		that.Canvas.height = that.Canvas.width;
-		*/
 }
 
 Enjine.GameCanvas.prototype = {
