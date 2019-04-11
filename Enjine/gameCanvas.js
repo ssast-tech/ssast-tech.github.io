@@ -19,6 +19,9 @@ Enjine.GameCanvas.prototype = {
 		this.Canvas.width = window.innerWidth;
 		this.Canvas.height = window.innerHeight;
 
+		if(this.Canvas.height > this.Canvas.width)
+			this.Canvas.height = this.Canvas.width;
+
 		var that = this;
 
 		window.addEventListener('resize', function(e) {
@@ -98,11 +101,8 @@ Enjine.GameCanvas.prototype = {
 		this.Context2D.arc(attackX, attackY, radius, 0, 2 * Math.PI);
 		this.Context2D.fill();
 
-
-
 		this.Context2D.restore();
-
-
+		var body = document.body.getBoundingClientRect();
 
 		this.Canvas.addEventListener('touchstart', function(event) {
 			event.preventDefault();
@@ -118,7 +118,7 @@ Enjine.GameCanvas.prototype = {
 			for(e of event.touches)
 			{
 				var x = e.clientX,
-					y = e.clientY;
+					y = e.clientY - body.top;
 				if(x>=rightX-radius&&x<=rightX+radius&&y>=rightY-radius&&y<=rightY+radius)
 				{Enjine.KeyboardInput.Pressed[39]=true;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[39]=false},200);
@@ -155,7 +155,7 @@ Enjine.GameCanvas.prototype = {
 			for(e of event.changedTouches)
 			{
 				var x = e.clientX,
-					y = e.clientY;
+					y = e.clientY - body.top;
 
 				if(x>=rightX-newR&&x<=rightX+newR&&y>=rightY-newR&&y<=rightY+newR)
 				{Enjine.KeyboardInput.Pressed[39]=false;
