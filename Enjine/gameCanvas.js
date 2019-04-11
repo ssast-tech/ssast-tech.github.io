@@ -150,7 +150,7 @@ Enjine.GameCanvas.prototype = {
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[39]=false},200);
 					//右键
 				}
-				else if(x>=leftX-radius&&x<=leftX+radius&&y>=leftY-radius&&y<=leftY+radius)
+				if(x>=leftX-radius&&x<=leftX+radius&&y>=leftY-radius&&y<=leftY+radius)
 				{Enjine.KeyboardInput.Pressed[37]=true;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[37]=false},200);
 					//左键
@@ -160,7 +160,7 @@ Enjine.GameCanvas.prototype = {
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[65]=false},200);
 					//攻击键
 				}
-				else if(x>=upX-radius&&x<=upX+radius&&y>=upY-radius&&y<=upY+radius)
+				if(x>=upX-radius&&x<=upX+radius&&y>=upY-radius&&y<=upY+radius)
 				{Enjine.KeyboardInput.Pressed[83]=true;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[83]=false},200);
 					//跳越键
@@ -171,6 +171,10 @@ Enjine.GameCanvas.prototype = {
 					//home键
 				}
 			}
+			if(Enjine.KeyboardInput.Pressed[83] && Enjine.KeyboardInput.Pressed[65])
+				Enjine.KeyboardInput.Pressed[83] = false;
+			if(Enjine.KeyboardInput.Pressed[37] && Enjine.KeyboardInput.Pressed[39])
+				Enjine.KeyboardInput.Pressed[37] = false;
 		});
 
 		this.Canvas.addEventListener('touchend', function(event) {
