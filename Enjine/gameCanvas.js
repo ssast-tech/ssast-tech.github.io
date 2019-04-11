@@ -83,8 +83,10 @@ Enjine.GameCanvas.prototype = {
 		var upImage = new Image();
 		upImage.src ="images/baseline-up.svg";
 
+		/*
 		var backImage = new Image();
 		backImage.src ="images/baseline-home.svg";
+		*/
 
 		var attackImage = new Image();
 		attackImage.src ="images/baseline-attack.svg";
@@ -114,12 +116,14 @@ Enjine.GameCanvas.prototype = {
 		this.Context2D.arc(upX, upY, radius, 0, 2 * Math.PI);
 		this.Context2D.fill();
 
+		/*
 		this.Context2D.beginPath();
 		this.Context2D.drawImage(backImage, this.Canvas.width /15 *13, this.Canvas.height /10-radius, radius * 2, radius * 2)
 		var backX = this.Canvas.width / 15*14;
 		var backY = this.Canvas.height / 10;
 		this.Context2D.arc(backX, backY, radius, 0, 2 * Math.PI);
 		this.Context2D.fill();
+		*/
 
 		this.Context2D.beginPath();
 		this.Context2D.drawImage(attackImage, this.Canvas.width /15 *13, this.Canvas.height /2 +  radius, radius * 2, radius * 2)
@@ -165,11 +169,13 @@ Enjine.GameCanvas.prototype = {
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[83]=false},200);
 					//跳越键
 				}
+					/*
 				if(x>=backX-radius&&x<=backX+radius&&y>=backY-radius&&y<=backY+radius)
 				{
 					//location.reload() ;
 					//home键
 				}
+				*/
 			}
 			if(Enjine.KeyboardInput.Pressed[83] && Enjine.KeyboardInput.Pressed[65])
 				Enjine.KeyboardInput.Pressed[83] = false;
