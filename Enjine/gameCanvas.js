@@ -40,7 +40,7 @@ Enjine.GameCanvas.prototype = {
 			resize(that);
 		});
 
-		window.addEventListener('orientationchange', (function(){
+		window.addEventListener('orientationchange', function(){
 			resize(that);
 		});
 
