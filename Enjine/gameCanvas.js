@@ -36,7 +36,11 @@ Enjine.GameCanvas.prototype = {
 
 		resize(that);
 
-		$(window).resize(function(){
+		window.addEventListener('resize', (function(){
+			resize(that);
+		});
+
+		window.addEventListener('orientationchange', (function(){
 			resize(that);
 		});
 
