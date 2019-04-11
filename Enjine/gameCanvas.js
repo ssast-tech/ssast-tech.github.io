@@ -18,10 +18,16 @@ function resize(that)
 	that.Canvas.width = screen.width;
 	that.Canvas.height = screen.height;
 	*/
+	/*
 	that.Canvas.width = window.innerWidth;
 	that.Canvas.height = window.innerHeight;
+	*/
 
-	alert(String(that.Canvas.width) + ' ' + String(that.Canvas.height));
+	this.Canvas.width = 1000;
+	this.Canvas.height = 480;
+
+
+	//alert(String(that.Canvas.width) + ' ' + String(that.Canvas.height));
 	/*
 	if(that.Canvas.height > that.Canvas.width)
 		that.Canvas.height = that.Canvas.width;
