@@ -27,8 +27,10 @@ Enjine.GameCanvas.prototype = {
 		alert(String(screen.width) + ' ' + String(screen.height));
 		alert(String(window.screen.width) + ' ' + String(window.screen.height));
 
+		/*
 		if(this.Canvas.height > this.Canvas.width)
 			this.Canvas.height = this.Canvas.width;
+			*/
 
 		var that = this;
 
@@ -37,11 +39,18 @@ Enjine.GameCanvas.prototype = {
 			that.Canvas.width = screen.width;
 			that.Canvas.height = screen.height;
 			*/
+			/*
 			that.Canvas.width = window.innerWidth;
 			that.Canvas.height = window.innerHeight;
+			*/
 
+			that.Canvas.width = window.innerHeight;
+			that.Canvas.height = window.innerWidth;
+
+			/*
 			if(that.Canvas.height > that.Canvas.width)
 				that.Canvas.height = that.Canvas.width;
+			*/
 		});
 
 		this.Context2D = this.Canvas.getContext("2d");
