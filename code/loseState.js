@@ -26,6 +26,8 @@ Mario.LoseState.prototype.Enter = function() {
     this.gameOver.FramesPerSecond = 1/15;
     this.gameOver.X = 112;
     this.gameOver.Y = 68;
+
+	start = false;
     
     this.font = Mario.SpriteCuts.CreateBlackFont();
     this.font.Strings[0] = { String: "Game over!", X: 116, Y: 160 };

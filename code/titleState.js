@@ -45,6 +45,8 @@ Mario.TitleState.prototype.Enter = function() {
 	Mario.MarioCharacter = new Mario.Character();
 	Mario.MarioCharacter.Image = Enjine.Resources.Images["smallMario"];
 
+	start = false;
+
 	Mario.PlayTitleMusic();
 };
 

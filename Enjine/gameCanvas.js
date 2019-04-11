@@ -112,7 +112,6 @@ Enjine.GameCanvas.prototype = {
 
 			if(!start)
 			{
-				start = true;
 				Enjine.KeyboardInput.Pressed[83]=true;
 				return;
 			}
@@ -153,6 +152,13 @@ Enjine.GameCanvas.prototype = {
 			event.preventDefault();
 
 			var newR = 4 * radius;
+
+			if(!start)
+			{
+				Enjine.KeyboardInput.Pressed[83]=false;
+				start = true;
+				return;
+			}
 
 			var e;
 			for(e of event.changedTouches)
