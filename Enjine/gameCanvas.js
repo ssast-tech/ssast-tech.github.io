@@ -24,7 +24,7 @@ function resize(that)
 	*/
 
 	that.Canvas.width = window.innerWidth;
-	that.Canvas.height = that.Canvas.width / 1.7;
+	that.Canvas.height = that.Canvas.width / 1.8;
 
 
 	//alert(String(that.Canvas.width) + ' ' + String(that.Canvas.height));
