@@ -70,53 +70,55 @@ Enjine.GameCanvas.prototype = {
 	EndDraw: function() {
 		resize(this);
 
-		this.Context2D.drawImage(this.BackBuffer, 0, 0, this.BackBuffer.width, this.BackBuffer.height, 0, 0, this.Canvas.width, this.Canvas.height);
+			this.Context2D.drawImage(this.BackBuffer, 0, 0, this.BackBuffer.width, this.BackBuffer.height, 0, 0, this.Canvas.width, this.Canvas.height);
 
-		var radius = this.Canvas.width / 16;
+		if(start)
+		{
+			var radius = this.Canvas.width / 16;
 
-		var leftImage = new Image();
-		leftImage.src = "images/baseline-arrow_back_invert-24px.svg";
+			var leftImage = new Image();
+			leftImage.src = "images/baseline-arrow_back_invert-24px.svg";
 
-		var rightImage = new Image();
-		rightImage.src = "images/baseline-arrow_forward_invert-24px.svg";
+			var rightImage = new Image();
+			rightImage.src = "images/baseline-arrow_forward_invert-24px.svg";
 
-		var upImage = new Image();
-		upImage.src ="images/baseline-up.svg";
+			var upImage = new Image();
+			upImage.src ="images/baseline-up.svg";
 
-		/*
+			/*
 		var backImage = new Image();
 		backImage.src ="images/baseline-home.svg";
 		*/
 
-		var attackImage = new Image();
-		attackImage.src ="images/baseline-attack.svg";
+			var attackImage = new Image();
+			attackImage.src ="images/baseline-attack.svg";
 
-		this.Context2D.save();
-		this.Context2D.globalAlpha = 0.35;
-		this.Context2D.fillStyle = "rgba(0, 255, 255)";
+			this.Context2D.save();
+			this.Context2D.globalAlpha = 0.35;
+			this.Context2D.fillStyle = "rgba(0, 255, 255)";
 
-		this.Context2D.beginPath();
-		this.Context2D.drawImage(leftImage, this.Canvas.width /15 - radius, this.Canvas.height / 2 +radius, radius * 2, radius * 2)
-		var leftX = this.Canvas.width / 15;
-		var leftY = this.Canvas.height / 2 +2 * radius;
-		this.Context2D.arc(leftX, leftY, radius, 0, 2 * Math.PI);
-		this.Context2D.fill();
+			this.Context2D.beginPath();
+			this.Context2D.drawImage(leftImage, this.Canvas.width /15 - radius, this.Canvas.height / 2 +radius, radius * 2, radius * 2)
+			var leftX = this.Canvas.width / 15;
+			var leftY = this.Canvas.height / 2 +2 * radius;
+			this.Context2D.arc(leftX, leftY, radius, 0, 2 * Math.PI);
+			this.Context2D.fill();
 
-		this.Context2D.beginPath();
-		this.Context2D.drawImage(rightImage, this.Canvas.width / 15 * 2 , this.Canvas.height / 2 +  radius, radius * 2, radius * 2)
-		var rightX = this.Canvas.width / 15 * 3;
-		var rightY = this.Canvas.height / 2 + 2 * radius;
-		this.Context2D.arc(rightX, rightY, radius, 0, 2 * Math.PI);
-		this.Context2D.fill();
+			this.Context2D.beginPath();
+			this.Context2D.drawImage(rightImage, this.Canvas.width / 15 * 2 , this.Canvas.height / 2 +  radius, radius * 2, radius * 2)
+			var rightX = this.Canvas.width / 15 * 3;
+			var rightY = this.Canvas.height / 2 + 2 * radius;
+			this.Context2D.arc(rightX, rightY, radius, 0, 2 * Math.PI);
+			this.Context2D.fill();
 
-		this.Context2D.beginPath();
-		this.Context2D.drawImage(upImage, this.Canvas.width /15*11 , this.Canvas.height / 2 +  radius, radius * 2, radius * 2)
-		var upX = this.Canvas.width / 15*12;
-		var upY = this.Canvas.height / 2 + 2 * radius;
-		this.Context2D.arc(upX, upY, radius, 0, 2 * Math.PI);
-		this.Context2D.fill();
+			this.Context2D.beginPath();
+			this.Context2D.drawImage(upImage, this.Canvas.width /15*11 , this.Canvas.height / 2 +  radius, radius * 2, radius * 2)
+			var upX = this.Canvas.width / 15*12;
+			var upY = this.Canvas.height / 2 + 2 * radius;
+			this.Context2D.arc(upX, upY, radius, 0, 2 * Math.PI);
+			this.Context2D.fill();
 
-		/*
+			/*
 		this.Context2D.beginPath();
 		this.Context2D.drawImage(backImage, this.Canvas.width /15 *13, this.Canvas.height /10-radius, radius * 2, radius * 2)
 		var backX = this.Canvas.width / 15*14;
@@ -125,14 +127,16 @@ Enjine.GameCanvas.prototype = {
 		this.Context2D.fill();
 		*/
 
-		this.Context2D.beginPath();
-		this.Context2D.drawImage(attackImage, this.Canvas.width /15 *13, this.Canvas.height /2 +  radius, radius * 2, radius * 2)
-		var attackX = this.Canvas.width / 15*14;
-		var attackY = this.Canvas.height / 2 + 2 * radius;
-		this.Context2D.arc(attackX, attackY, radius, 0, 2 * Math.PI);
-		this.Context2D.fill();
+			this.Context2D.beginPath();
+			this.Context2D.drawImage(attackImage, this.Canvas.width /15 *13, this.Canvas.height /2 +  radius, radius * 2, radius * 2)
+			var attackX = this.Canvas.width / 15*14;
+			var attackY = this.Canvas.height / 2 + 2 * radius;
+			this.Context2D.arc(attackX, attackY, radius, 0, 2 * Math.PI);
+			this.Context2D.fill();
 
-		this.Context2D.restore();
+			this.Context2D.restore();
+		}
+
 		var body = document.body.getBoundingClientRect();
 
 		this.Canvas.addEventListener('touchstart', function(event) {
@@ -169,14 +173,14 @@ Enjine.GameCanvas.prototype = {
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[83]=false},200);
 					//跳越键
 				}
-					/*
+				/*
 				if(x>=backX-radius&&x<=backX+radius&&y>=backY-radius&&y<=backY+radius)
 				{
 					//location.reload() ;
 					//home键
 				}
 				*/
-			}
+				}
 			if(Enjine.KeyboardInput.Pressed[83] && Enjine.KeyboardInput.Pressed[65])
 				Enjine.KeyboardInput.Pressed[83] = false;
 			if(Enjine.KeyboardInput.Pressed[37] && Enjine.KeyboardInput.Pressed[39])
