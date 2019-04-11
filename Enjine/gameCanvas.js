@@ -12,18 +12,46 @@ Enjine.GameCanvas = function() {
 
 var start = false;
 
-Enjine.GameCanvas.prototype = {
-    Initialize: function(canvasId, resWidth, resHeight) {
-		this.Canvas = document.getElementById(canvasId);
 
-		this.Canvas.width = window.innerWidth;
-		this.Canvas.height = window.innerHeight;
+function resize(that)
+{
+	/*
+	that.Canvas.width = screen.width;
+	that.Canvas.height = screen.height;
+	*/
+	var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+	if(iOS)
+	{
+		that.Canvas.width = window.innerWidth * 0.999;
+		that.Canvas.height = that.Canvas.width / 2;
+	}
+	else
+	{
+		that.Canvas.width = window.innerWidth;
+		that.Canvas.height = window.innerHeight;
+	}
+
+
+	//alert(String(that.Canvas.width) + ' ' + String(that.Canvas.height));
+	if(that.Canvas.height > that.Canvas.width)
+		that.Canvas.height = that.Canvas.width * 0.75;
+}
+
+Enjine.GameCanvas.prototype = {
+	Initialize: function(canvasId, resWidth, resHeight) {
+		this.Canvas = document.getElementById(canvasId);
 
 		var that = this;
 
-		window.addEventListener('resize', function(e) {
-			that.Canvas.width = window.innerWidth;
-			that.Canvas.height = window.innerHeight;
+		resize(that);
+
+		window.addEventListener('resize', function(){
+			resize(that);
+		});
+
+		window.addEventListener('orientationchange', function(){
+			resize(that);
 		});
 
 		this.Context2D = this.Canvas.getContext("2d");
@@ -34,82 +62,88 @@ Enjine.GameCanvas.prototype = {
 
 	},
 
-    BeginDraw: function() {
-        this.BackBufferContext2D.clearRect(0, 0, this.BackBuffer.width, this.BackBuffer.height);
-        this.Context2D.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
-    },
+	BeginDraw: function() {
+		this.BackBufferContext2D.clearRect(0, 0, this.BackBuffer.width, this.BackBuffer.height);
+		this.Context2D.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
+	},
 
-    EndDraw: function() {
-        this.Context2D.drawImage(this.BackBuffer, 0, 0, this.BackBuffer.width, this.BackBuffer.height, 0, 0, this.Canvas.width, this.Canvas.height);
+	EndDraw: function() {
+		resize(this);
 
-		var radius = this.Canvas.width / 16;
+			this.Context2D.drawImage(this.BackBuffer, 0, 0, this.BackBuffer.width, this.BackBuffer.height, 0, 0, this.Canvas.width, this.Canvas.height);
 
-		var leftImage = new Image();
-		leftImage.src = "images/baseline-arrow_back_invert-24px.svg";
+		if(start)
+		{
+			var radius = this.Canvas.width / 16;
 
-		var rightImage = new Image();
-		rightImage.src = "images/baseline-arrow_forward_invert-24px.svg";
+			var leftImage = new Image();
+			leftImage.src = "images/baseline-arrow_back_invert-24px.svg";
 
-		var upImage = new Image();
-		upImage.src ="images/baseline-up.svg";
+			var rightImage = new Image();
+			rightImage.src = "images/baseline-arrow_forward_invert-24px.svg";
 
+			var upImage = new Image();
+			upImage.src ="images/baseline-up.svg";
+
+			/*
 		var backImage = new Image();
 		backImage.src ="images/baseline-home.svg";
+		*/
 
-		var attackImage = new Image();
-		attackImage.src ="images/baseline-attack.svg";
+			var attackImage = new Image();
+			attackImage.src ="images/baseline-attack.svg";
 
-		this.Context2D.save();
-		this.Context2D.globalAlpha = 0.35;
-		this.Context2D.fillStyle = "rgba(0, 255, 255)";
+			this.Context2D.save();
+			this.Context2D.globalAlpha = 0.35;
+			this.Context2D.fillStyle = "rgba(0, 255, 255)";
 
-		this.Context2D.beginPath();
-		this.Context2D.drawImage(leftImage, this.Canvas.width /15 - radius, this.Canvas.height / 2 +radius, radius * 2, radius * 2)
-		var leftX = this.Canvas.width / 15;
-		var leftY = this.Canvas.height / 2 +2 * radius;
-		this.Context2D.arc(leftX, leftY, radius, 0, 2 * Math.PI);
-		this.Context2D.fill();
+			this.Context2D.beginPath();
+			this.Context2D.drawImage(leftImage, this.Canvas.width /15 - radius, this.Canvas.height / 2 +radius, radius * 2, radius * 2)
+			var leftX = this.Canvas.width / 15;
+			var leftY = this.Canvas.height / 2 +2 * radius;
+			this.Context2D.arc(leftX, leftY, radius, 0, 2 * Math.PI);
+			this.Context2D.fill();
 
-		this.Context2D.beginPath();
-		this.Context2D.drawImage(rightImage, this.Canvas.width / 15 * 2 , this.Canvas.height / 2 +  radius, radius * 2, radius * 2)
-		var rightX = this.Canvas.width / 15 * 3;
-		var rightY = this.Canvas.height / 2 + 2 * radius;
-		this.Context2D.arc(rightX, rightY, radius, 0, 2 * Math.PI);
-		this.Context2D.fill();
+			this.Context2D.beginPath();
+			this.Context2D.drawImage(rightImage, this.Canvas.width / 15 * 2 , this.Canvas.height / 2 +  radius, radius * 2, radius * 2)
+			var rightX = this.Canvas.width / 15 * 3;
+			var rightY = this.Canvas.height / 2 + 2 * radius;
+			this.Context2D.arc(rightX, rightY, radius, 0, 2 * Math.PI);
+			this.Context2D.fill();
 
-		this.Context2D.beginPath();
-		this.Context2D.drawImage(upImage, this.Canvas.width /15*11 , this.Canvas.height / 2 +  radius, radius * 2, radius * 2)
-		var upX = this.Canvas.width / 15*12;
-		var upY = this.Canvas.height / 2 + 2 * radius;
-		this.Context2D.arc(upX, upY, radius, 0, 2 * Math.PI);
-		this.Context2D.fill();
+			this.Context2D.beginPath();
+			this.Context2D.drawImage(upImage, this.Canvas.width /15*11 , this.Canvas.height / 2 +  radius, radius * 2, radius * 2)
+			var upX = this.Canvas.width / 15*12;
+			var upY = this.Canvas.height / 2 + 2 * radius;
+			this.Context2D.arc(upX, upY, radius, 0, 2 * Math.PI);
+			this.Context2D.fill();
 
+			/*
 		this.Context2D.beginPath();
 		this.Context2D.drawImage(backImage, this.Canvas.width /15 *13, this.Canvas.height /10-radius, radius * 2, radius * 2)
 		var backX = this.Canvas.width / 15*14;
 		var backY = this.Canvas.height / 10;
 		this.Context2D.arc(backX, backY, radius, 0, 2 * Math.PI);
 		this.Context2D.fill();
+		*/
 
-		this.Context2D.beginPath();
-		this.Context2D.drawImage(attackImage, this.Canvas.width /15 *13, this.Canvas.height /2 +  radius, radius * 2, radius * 2)
-		var attackX = this.Canvas.width / 15*14;
-		var attackY = this.Canvas.height / 2 + 2 * radius;
-		this.Context2D.arc(attackX, attackY, radius, 0, 2 * Math.PI);
-		this.Context2D.fill();
+			this.Context2D.beginPath();
+			this.Context2D.drawImage(attackImage, this.Canvas.width /15 *13, this.Canvas.height /2 +  radius, radius * 2, radius * 2)
+			var attackX = this.Canvas.width / 15*14;
+			var attackY = this.Canvas.height / 2 + 2 * radius;
+			this.Context2D.arc(attackX, attackY, radius, 0, 2 * Math.PI);
+			this.Context2D.fill();
 
+			this.Context2D.restore();
+		}
 
-
-		this.Context2D.restore();
-
-
+		var body = document.body.getBoundingClientRect();
 
 		this.Canvas.addEventListener('touchstart', function(event) {
 			event.preventDefault();
 
 			if(!start)
 			{
-				start = true;
 				Enjine.KeyboardInput.Pressed[83]=true;
 				return;
 			}
@@ -118,7 +152,7 @@ Enjine.GameCanvas.prototype = {
 			for(e of event.touches)
 			{
 				var x = e.clientX,
-					y = e.clientY;
+					y = e.clientY - body.top;
 				if(x>=rightX-radius&&x<=rightX+radius&&y>=rightY-radius&&y<=rightY+radius)
 				{Enjine.KeyboardInput.Pressed[39]=true;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[39]=false},200);
@@ -129,21 +163,28 @@ Enjine.GameCanvas.prototype = {
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[37]=false},200);
 					//左键
 				}
-				if(x>=upX-radius&&x<=upX+radius&&y>=upY-radius&&y<=upY+radius)
-				{Enjine.KeyboardInput.Pressed[83]=true;
-					//setTimeout(function(){Enjine.KeyboardInput.Pressed[83]=false},200);
-					//跳越键
-				}
 				if(x>=attackX-radius&&x<=attackX+radius&&y>=attackY-radius&&y<=attackY+radius)
 				{Enjine.KeyboardInput.Pressed[65]=true;
 					//setTimeout(function(){Enjine.KeyboardInput.Pressed[65]=false},200);
 					//攻击键
 				}
+				if(x>=upX-radius&&x<=upX+radius&&y>=upY-radius&&y<=upY+radius)
+				{Enjine.KeyboardInput.Pressed[83]=true;
+					//setTimeout(function(){Enjine.KeyboardInput.Pressed[83]=false},200);
+					//跳越键
+				}
+				/*
 				if(x>=backX-radius&&x<=backX+radius&&y>=backY-radius&&y<=backY+radius)
-				{location.reload() ;
+				{
+					//location.reload() ;
 					//home键
 				}
-			}
+				*/
+				}
+			if(Enjine.KeyboardInput.Pressed[83] && Enjine.KeyboardInput.Pressed[65])
+				Enjine.KeyboardInput.Pressed[83] = false;
+			if(Enjine.KeyboardInput.Pressed[37] && Enjine.KeyboardInput.Pressed[39])
+				Enjine.KeyboardInput.Pressed[37] = false;
 		});
 
 		this.Canvas.addEventListener('touchend', function(event) {
@@ -151,11 +192,18 @@ Enjine.GameCanvas.prototype = {
 
 			var newR = 4 * radius;
 
+			if(!start)
+			{
+				Enjine.KeyboardInput.Pressed[83]=false;
+				start = true;
+				return;
+			}
+
 			var e;
 			for(e of event.changedTouches)
 			{
 				var x = e.clientX,
-					y = e.clientY;
+					y = e.clientY - body.top;
 
 				if(x>=rightX-newR&&x<=rightX+newR&&y>=rightY-newR&&y<=rightY+newR)
 				{Enjine.KeyboardInput.Pressed[39]=false;
