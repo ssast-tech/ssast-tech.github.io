@@ -16,11 +16,11 @@ Enjine.GameCanvas.prototype = {
     Initialize: function(canvasId, resWidth, resHeight) {
 		this.Canvas = document.getElementById(canvasId);
 
-		this.Canvas.width = window.innerWidth;
-		this.Canvas.height = window.innerHeight;
+		this.Canvas.width = screen.width;
+		this.Canvas.height = screen.height;
 
-		alert(String(this.Canvas.width) + ' ' + String(this.Canvas.height));
-		alert(String(screen.width) + ' ' + String(screen.height));
+		//alert(String(this.Canvas.width) + ' ' + String(this.Canvas.height));
+		//alert(String(screen.width) + ' ' + String(screen.height));
 
 		if(this.Canvas.height > this.Canvas.width)
 			this.Canvas.height = this.Canvas.width;
@@ -28,8 +28,13 @@ Enjine.GameCanvas.prototype = {
 		var that = this;
 
 		$(window).resize(function(e) {
+
+			that.Canvas.width = screen.width;
+			that.Canvas.height = screen.height;
+			/*
 			that.Canvas.width = window.innerWidth;
 			that.Canvas.height = window.innerHeight;
+			*/
 
 			if(that.Canvas.height > that.Canvas.width)
 				that.Canvas.height = that.Canvas.width;
